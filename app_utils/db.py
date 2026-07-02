@@ -7,13 +7,26 @@ import streamlit as st
 load_dotenv()
 
 def get_connection():
-    return psycopg2.connect(
-        host     = os.getenv("DB_HOST"),
-        database = os.getenv("DB_NAME"),
-        user     = os.getenv("DB_USER"),
-        password = os.getenv("DB_PASSWORD"),
-        port     = os.getenv("DB_PORT")
-    )
+    try:
+        import streamlit as st
+        return psycopg2.connect(
+            host     = st.secrets["DB_HOST"],
+            port     = st.secrets["DB_PORT"],
+            database = st.secrets["DB_NAME"],
+            user     = st.secrets["DB_USER"],
+            password = st.secrets["DB_PASSWORD"],
+            sslmode  = "require"
+        )
+    except Exception:
+        load_dotenv()
+        return psycopg2.connect(
+            host     = os.getenv("DB_HOST"),
+            port     = os.getenv("DB_PORT"),
+            database = os.getenv("DB_NAME"),
+            user     = os.getenv("DB_USER"),
+            password = os.getenv("DB_PASSWORD"),
+            sslmode  = "require"
+        )
 
 @st.cache_data(ttl=3600)
 def get_all_tickers():

@@ -8,3 +8,7 @@ notebooks/
 *.csv
 .ipynb_checkpoints/
 venv/
+*.dump
+*.sql
+*.ipynb
+.streamlit/secrets.toml

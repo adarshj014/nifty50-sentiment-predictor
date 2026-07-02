@@ -26,14 +26,19 @@ def load_models():
 @st.cache_resource
 def load_finbert():
     from transformers import BertTokenizer, BertForSequenceClassification
-    model_path = f"{MODELS_DIR}/finbert_indian"
+    import os
+
+    model_path = "models/finbert_indian"
 
     if os.path.exists(model_path):
+        print("Loading fine-tuned Indian FinBERT...")
         tokenizer = BertTokenizer.from_pretrained(model_path)
-        model = BertForSequenceClassification.from_pretrained(model_path)
+        model     = BertForSequenceClassification.from_pretrained(model_path)
     else:
+        # fall back to original FinBERT from HuggingFace
+        print("Loading original FinBERT...")
         tokenizer = BertTokenizer.from_pretrained("ProsusAI/finbert")
-        model = BertForSequenceClassification.from_pretrained("ProsusAI/finbert")
+        model     = BertForSequenceClassification.from_pretrained("ProsusAI/finbert")
 
     model.eval()
     return tokenizer, model

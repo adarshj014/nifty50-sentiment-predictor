@@ -1,21 +1,3 @@
-pandas
-yfinance
-psycopg2-binary
-python-dotenv
-sqlalchemy
-jupyter
-gdeltdoc 
-newspaper3k 
-feedparser
-lxml[html_clean] 
-lxml_html_clean
-transformers 
-torch
-xgboost 
-scikit-learn 
-shap 
-joblib 
-matplotlib
 streamlit
 pandas
 plotly
@@ -27,3 +9,4 @@ scikit-learn
 transformers
 torch
 shap
+yfinance
